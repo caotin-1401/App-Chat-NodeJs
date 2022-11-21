@@ -1,0 +1,31 @@
+{
+    "name": "app-chat-nodejs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node src/server.js",
+        "dev": "nodemon src/server.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/caotin-1401/App-Chat-NodeJs.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/caotin-1401/App-Chat-NodeJs/issues"
+    },
+    "homepage": "https://github.com/caotin-1401/App-Chat-NodeJs#readme",
+    "dependencies": {
+        "@babel/node": "^7.20.2",
+        "bad-words": "^3.0.4",
+        "date-format": "^4.0.14",
+        "express": "^4.18.2",
+        "socket.io": "^4.5.3"
+    },
+    "devDependencies": {
+        "nodemon": "^2.0.20"
+    }
+}
