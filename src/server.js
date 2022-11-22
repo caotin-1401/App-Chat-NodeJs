@@ -12,7 +12,9 @@ const {
 } = require("./views/js/user");
 const viewPath = path.join(__dirname, "./views");
 const socketio = require("socket.io");
+
 require("dotenv").config();
+
 app.use(express.static(viewPath));
 
 const server = http.createServer(app);
