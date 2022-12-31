@@ -4,16 +4,9 @@ const path = require("path");
 const http = require("http");
 const Filter = require("bad-words");
 const format = require("date-format");
-const {
-    getListUser,
-    addUser,
-    removeUser,
-    findUser,
-} = require("./views/js/user");
+const { getListUser, addUser, removeUser, findUser } = require("./views/js/user");
 const viewPath = path.join(__dirname, "./views");
 const socketio = require("socket.io");
-
-require("dotenv").config();
 
 app.use(express.static(viewPath));
 
@@ -35,22 +28,13 @@ io.on("connection", (socket) => {
         socket.join(room);
         //chao ngươi dung moi nguoi
         //Gửi cho client mới tham gia
-        socket.emit(
-            "send mes from server",
-            createMessage(`Chào mừng bạn đã đến với phòng ${room}`, "Admin")
-        );
+        socket.emit("send mes from server", createMessage(`Chào mừng bạn đã đến với phòng ${room}`, "Admin"));
 
         //Gửi cho các client còn lại
         //broadcast Gửi cho all client trừ người tương tác
         socket.broadcast
             .to(room)
-            .emit(
-                "send mes from server",
-                createMessage(
-                    `${username} mới tham gia vào phòng ${room}`,
-                    "Admin"
-                )
-            );
+            .emit("send mes from server", createMessage(`${username} mới tham gia vào phòng ${room}`, "Admin"));
 
         //chat
         socket.on("send mes from client", (mes, callback) => {
@@ -60,10 +44,7 @@ io.on("connection", (socket) => {
             }
 
             const user = findUser(socket.id);
-            io.to(room).emit(
-                "send mes from server",
-                createMessage(mes, user.username)
-            );
+            io.to(room).emit("send mes from server", createMessage(mes, user.username));
             callback();
         });
 
@@ -71,10 +52,7 @@ io.on("connection", (socket) => {
         socket.on("send location from client", (latitude, longitude) => {
             const location = `https://www.google.com/maps?q=${latitude},${longitude}`;
             const user = findUser(socket.id);
-            io.to(room).emit(
-                "send location from server",
-                createMessage(location, user.username)
-            );
+            io.to(room).emit("send location from server", createMessage(location, user.username));
         });
 
         //list User
@@ -108,8 +86,6 @@ io.on("connection", (socket) => {
     //disconnect client
 });
 
-let port = process.env.PORT || 6969;
-
-server.listen(port, () => {
-    console.log("Backend Nodejs is runing on the port : " + port);
+server.listen(6969, () => {
+    console.log("Backend Nodejs is runing on the port : " + 6969);
 });
